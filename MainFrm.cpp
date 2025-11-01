@@ -26,6 +26,20 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(ID_VIEW_CUSTOMIZE, &CMainFrame::OnViewCustomize)
 	ON_REGISTERED_MESSAGE(AFX_WM_CREATETOOLBAR, &CMainFrame::OnToolbarCreateNew)
 	ON_WM_SETTINGCHANGE()
+	// DICOM Viewer commands
+	ON_COMMAND(ID_DICOM_OPEN_FILE, &CMainFrame::OnDicomOpenFile)
+	ON_COMMAND(ID_DICOM_OPEN_FOLDER, &CMainFrame::OnDicomOpenFolder)
+	ON_COMMAND(ID_VIEW_ZOOM_IN, &CMainFrame::OnViewZoomIn)
+	ON_COMMAND(ID_VIEW_ZOOM_OUT, &CMainFrame::OnViewZoomOut)
+	ON_COMMAND(ID_VIEW_ZOOM_FIT, &CMainFrame::OnViewZoomFit)
+	ON_COMMAND(ID_VIEW_PAN, &CMainFrame::OnViewPan)
+	ON_COMMAND(ID_VIEW_WINDOW_LEVEL, &CMainFrame::OnViewWindowLevel)
+	ON_COMMAND(ID_VIEW_ROTATE_LEFT, &CMainFrame::OnViewRotateLeft)
+	ON_COMMAND(ID_VIEW_ROTATE_RIGHT, &CMainFrame::OnViewRotateRight)
+	ON_COMMAND(ID_VIEW_INVERT, &CMainFrame::OnViewInvert)
+	ON_COMMAND(ID_VIEW_FULLSCREEN, &CMainFrame::OnViewFullScreen)
+	ON_COMMAND(ID_TOOLS_MEASURE_DISTANCE, &CMainFrame::OnToolsMeasureDistance)
+	ON_COMMAND(ID_TOOLS_MEASURE_ANGLE, &CMainFrame::OnToolsMeasureAngle)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -342,4 +356,84 @@ void CMainFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 {
 	CMDIFrameWndEx::OnSettingChange(uFlags, lpszSection);
 	m_wndOutput.UpdateFonts();
+}
+
+// DICOM Viewer command handlers
+
+void CMainFrame::OnDicomOpenFile()
+{
+	// TODO: Implement DICOM file opening dialog
+	AfxMessageBox(_T("Open DICOM File - To be implemented"));
+}
+
+void CMainFrame::OnDicomOpenFolder()
+{
+	// TODO: Implement DICOM folder opening dialog
+	AfxMessageBox(_T("Open DICOM Folder - To be implemented"));
+}
+
+void CMainFrame::OnViewZoomIn()
+{
+	// TODO: Implement zoom in functionality
+	AfxMessageBox(_T("Zoom In - To be implemented"));
+}
+
+void CMainFrame::OnViewZoomOut()
+{
+	// TODO: Implement zoom out functionality
+	AfxMessageBox(_T("Zoom Out - To be implemented"));
+}
+
+void CMainFrame::OnViewZoomFit()
+{
+	// TODO: Implement fit to window functionality
+	AfxMessageBox(_T("Zoom to Fit - To be implemented"));
+}
+
+void CMainFrame::OnViewPan()
+{
+	// TODO: Implement pan tool
+	AfxMessageBox(_T("Pan Tool - To be implemented"));
+}
+
+void CMainFrame::OnViewWindowLevel()
+{
+	// TODO: Implement window/level adjustment
+	AfxMessageBox(_T("Window/Level - To be implemented"));
+}
+
+void CMainFrame::OnViewRotateLeft()
+{
+	// TODO: Implement rotate left
+	AfxMessageBox(_T("Rotate Left - To be implemented"));
+}
+
+void CMainFrame::OnViewRotateRight()
+{
+	// TODO: Implement rotate right
+	AfxMessageBox(_T("Rotate Right - To be implemented"));
+}
+
+void CMainFrame::OnViewInvert()
+{
+	// TODO: Implement image inversion
+	AfxMessageBox(_T("Invert Image - To be implemented"));
+}
+
+void CMainFrame::OnViewFullScreen()
+{
+	// TODO: Implement full screen mode toggle
+	AfxMessageBox(_T("Full Screen - To be implemented"));
+}
+
+void CMainFrame::OnToolsMeasureDistance()
+{
+	// TODO: Implement distance measurement tool
+	AfxMessageBox(_T("Measure Distance - To be implemented"));
+}
+
+void CMainFrame::OnToolsMeasureAngle()
+{
+	// TODO: Implement angle measurement tool
+	AfxMessageBox(_T("Measure Angle - To be implemented"));
 }
