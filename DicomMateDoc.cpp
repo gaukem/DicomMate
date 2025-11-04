@@ -11,6 +11,7 @@
 #endif
 
 #include "DicomMateDoc.h"
+#include "DicomImage.h"
 
 #include <propkey.h>
 
@@ -136,3 +137,18 @@ void CDicomMateDoc::Dump(CDumpContext& dc) const
 
 
 // CDicomMateDoc commands
+
+BOOL CDicomMateDoc::LoadDicomFile(const CString& filePath)
+{
+	if (!m_dicomImage.LoadFromFile(filePath))
+	{
+		return FALSE;
+	}
+
+	// Set the document title to the file name
+	SetTitle(filePath);
+	SetModifiedFlag(FALSE);
+	UpdateAllViews(nullptr);
+
+	return TRUE;
+}

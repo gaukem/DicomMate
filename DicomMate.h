@@ -27,6 +27,9 @@ public:
 
 // Implementation
 	BOOL  m_bHiColorIcons;
+	CMultiDocTemplate* m_pDocTemplate;
+
+	CMultiDocTemplate* GetDocTemplate() { return m_pDocTemplate; }
 
 	virtual void PreLoadState();
 	virtual void LoadCustomState();

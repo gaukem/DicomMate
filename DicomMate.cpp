@@ -35,6 +35,7 @@ END_MESSAGE_MAP()
 CDicomMateApp::CDicomMateApp() noexcept
 {
 	m_bHiColorIcons = TRUE;
+	m_pDocTemplate = nullptr;
 
 
 	// support Restart Manager
@@ -113,14 +114,13 @@ BOOL CDicomMateApp::InitInstance()
 
 	// Register the application's document templates.  Document templates
 	//  serve as the connection between documents, frame windows and views
-	CMultiDocTemplate* pDocTemplate;
-	pDocTemplate = new CMultiDocTemplate(IDR_DicomMateTYPE,
+	m_pDocTemplate = new CMultiDocTemplate(IDR_DicomMateTYPE,
 		RUNTIME_CLASS(CDicomMateDoc),
 		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
 		RUNTIME_CLASS(CDicomMateView));
-	if (!pDocTemplate)
+	if (!m_pDocTemplate)
 		return FALSE;
-	AddDocTemplate(pDocTemplate);
+	AddDocTemplate(m_pDocTemplate);
 
 	// create main MDI Frame window
 	CMainFrame* pMainFrame = new CMainFrame;

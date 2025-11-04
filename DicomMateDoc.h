@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include "DicomImage.h"
 
 class CDicomMateDoc : public CDocument
 {
@@ -14,9 +15,12 @@ protected: // create from serialization only
 
 // Attributes
 public:
+	CDicomImage m_dicomImage;
 
 // Operations
 public:
+	BOOL LoadDicomFile(const CString& filePath);
+	CDicomImage* GetDicomImage() { return &m_dicomImage; }
 
 // Overrides
 public:
