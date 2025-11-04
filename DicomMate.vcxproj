@@ -185,6 +185,7 @@
   <ItemGroup>
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
+    <ClInclude Include="DicomImage.h" />
     <ClInclude Include="DicomMate.h" />
     <ClInclude Include="DicomMateDoc.h" />
     <ClInclude Include="DicomMateView.h" />
@@ -201,6 +202,7 @@
   <ItemGroup>
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="DicomImage.cpp" />
     <ClCompile Include="DicomMate.cpp" />
     <ClCompile Include="DicomMateDoc.cpp" />
     <ClCompile Include="DicomMateView.cpp" />

@@ -7,6 +7,8 @@
 #include "DicomMate.h"
 
 #include "MainFrm.h"
+#include "DicomMateDoc.h"
+#include "DicomMateView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -362,8 +364,35 @@ void CMainFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 
 void CMainFrame::OnDicomOpenFile()
 {
-	// TODO: Implement DICOM file opening dialog
-	AfxMessageBox(_T("Open DICOM File - To be implemented"));
+	// Create file open dialog for DICOM files
+	CFileDialog dlg(TRUE, _T("dcm"), nullptr,
+		OFN_HIDEREADONLY | OFN_FILEMUSTEXIST,
+		_T("DICOM Files (*.dcm;*.dicom;*.dic)|*.dcm;*.dicom;*.dic|All Files (*.*)|*.*||"),
+		this);
+
+	if (dlg.DoModal() == IDOK)
+	{
+		CString filePath = dlg.GetPathName();
+		
+		// Create new document and view
+		CDocTemplate* pTemplate = theApp.GetDocTemplate();
+		if (pTemplate)
+		{
+			CDocument* pDoc = pTemplate->OpenDocumentFile(nullptr);
+			if (pDoc)
+			{
+				CDicomMateDoc* pDicomDoc = DYNAMIC_DOWNCAST(CDicomMateDoc, pDoc);
+				if (pDicomDoc)
+				{
+					if (!pDicomDoc->LoadDicomFile(filePath))
+					{
+						AfxMessageBox(_T("Failed to load DICOM file."));
+						pDoc->OnCloseDocument();
+					}
+				}
+			}
+		}
+	}
 }
 
 void CMainFrame::OnDicomOpenFolder()
@@ -374,32 +403,89 @@ void CMainFrame::OnDicomOpenFolder()
 
 void CMainFrame::OnViewZoomIn()
 {
-	// TODO: Implement zoom in functionality
-	AfxMessageBox(_T("Zoom In - To be implemented"));
+	CMDIChildWnd* pChild = MDIGetActive();
+	if (pChild)
+	{
+		CView* pView = pChild->GetActiveView();
+		if (pView)
+		{
+			CDicomMateView* pDicomView = DYNAMIC_DOWNCAST(CDicomMateView, pView);
+			if (pDicomView)
+			{
+				pDicomView->ZoomIn();
+			}
+		}
+	}
 }
 
 void CMainFrame::OnViewZoomOut()
 {
-	// TODO: Implement zoom out functionality
-	AfxMessageBox(_T("Zoom Out - To be implemented"));
+	CMDIChildWnd* pChild = MDIGetActive();
+	if (pChild)
+	{
+		CView* pView = pChild->GetActiveView();
+		if (pView)
+		{
+			CDicomMateView* pDicomView = DYNAMIC_DOWNCAST(CDicomMateView, pView);
+			if (pDicomView)
+			{
+				pDicomView->ZoomOut();
+			}
+		}
+	}
 }
 
 void CMainFrame::OnViewZoomFit()
 {
-	// TODO: Implement fit to window functionality
-	AfxMessageBox(_T("Zoom to Fit - To be implemented"));
+	CMDIChildWnd* pChild = MDIGetActive();
+	if (pChild)
+	{
+		CView* pView = pChild->GetActiveView();
+		if (pView)
+		{
+			CDicomMateView* pDicomView = DYNAMIC_DOWNCAST(CDicomMateView, pView);
+			if (pDicomView)
+			{
+				pDicomView->ZoomToFit();
+			}
+		}
+	}
 }
 
 void CMainFrame::OnViewPan()
 {
-	// TODO: Implement pan tool
-	AfxMessageBox(_T("Pan Tool - To be implemented"));
+	CMDIChildWnd* pChild = MDIGetActive();
+	if (pChild)
+	{
+		CView* pView = pChild->GetActiveView();
+		if (pView)
+		{
+			CDicomMateView* pDicomView = DYNAMIC_DOWNCAST(CDicomMateView, pView);
+			if (pDicomView)
+			{
+				pDicomView->SetPanMode(TRUE);
+				pDicomView->SetWindowLevelMode(FALSE);
+			}
+		}
+	}
 }
 
 void CMainFrame::OnViewWindowLevel()
 {
-	// TODO: Implement window/level adjustment
-	AfxMessageBox(_T("Window/Level - To be implemented"));
+	CMDIChildWnd* pChild = MDIGetActive();
+	if (pChild)
+	{
+		CView* pView = pChild->GetActiveView();
+		if (pView)
+		{
+			CDicomMateView* pDicomView = DYNAMIC_DOWNCAST(CDicomMateView, pView);
+			if (pDicomView)
+			{
+				pDicomView->SetWindowLevelMode(TRUE);
+				pDicomView->SetPanMode(FALSE);
+			}
+		}
+	}
 }
 
 void CMainFrame::OnViewRotateLeft()
