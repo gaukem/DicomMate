@@ -76,10 +76,12 @@ BOOL CDicomImage::LoadFromFile(const CString& filePath)
 	{
 		if (dicomImage)
 			delete dicomImage;
+		delete fileFormat;
 		return FALSE;
 	}
 
 	m_pDicomImage = dicomImage;
+	m_pDicomFile = fileFormat;
 	m_filePath = filePath;
 
 	// Get image dimensions

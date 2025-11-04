@@ -29,6 +29,13 @@ private:
 	BOOL m_bPanning;
 	CPoint m_lastMousePos;
 	BOOL m_bWindowLeveling;
+	
+	// Zoom and window/level constants
+	static constexpr double ZOOM_FACTOR_TOOLBAR = 1.25;
+	static constexpr double ZOOM_FACTOR_WHEEL = 1.1;
+	static constexpr double ZOOM_MIN = 0.1;
+	static constexpr double ZOOM_MAX = 20.0;
+	static constexpr double WINDOW_LEVEL_SENSITIVITY = 2.0;
 
 // Operations
 public:

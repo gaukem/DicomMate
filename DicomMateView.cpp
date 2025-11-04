@@ -262,15 +262,17 @@ void CDicomMateView::ResetView()
 
 void CDicomMateView::ZoomIn()
 {
-	m_zoomFactor *= 1.25;
+	m_zoomFactor *= ZOOM_FACTOR_TOOLBAR;
+	if (m_zoomFactor > ZOOM_MAX)
+		m_zoomFactor = ZOOM_MAX;
 	Invalidate();
 }
 
 void CDicomMateView::ZoomOut()
 {
-	m_zoomFactor /= 1.25;
-	if (m_zoomFactor < 0.1)
-		m_zoomFactor = 0.1;
+	m_zoomFactor /= ZOOM_FACTOR_TOOLBAR;
+	if (m_zoomFactor < ZOOM_MIN)
+		m_zoomFactor = ZOOM_MIN;
 	Invalidate();
 }
 
@@ -289,6 +291,10 @@ void CDicomMateView::ZoomToFit()
 
 	int imageWidth = pDicomImage->GetWidth();
 	int imageHeight = pDicomImage->GetHeight();
+	
+	// Validate dimensions
+	if (imageWidth <= 0 || imageHeight <= 0)
+		return;
 
 	double zoomX = static_cast<double>(clientRect.Width()) / imageWidth;
 	double zoomY = static_cast<double>(clientRect.Height()) / imageHeight;
@@ -341,10 +347,10 @@ void CDicomMateView::OnMouseMove(UINT nFlags, CPoint point)
 					double windowWidth = pDicomImage->GetWindowWidth();
 					
 					// Adjust window center (horizontal movement)
-					windowCenter += delta.x * 2.0;
+					windowCenter += delta.x * WINDOW_LEVEL_SENSITIVITY;
 					
 					// Adjust window width (vertical movement)
-					windowWidth += delta.y * 2.0;
+					windowWidth += delta.y * WINDOW_LEVEL_SENSITIVITY;
 					if (windowWidth < 1.0)
 						windowWidth = 1.0;
 					
@@ -369,13 +375,15 @@ BOOL CDicomMateView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 	// Zoom with mouse wheel
 	if (zDelta > 0)
 	{
-		m_zoomFactor *= 1.1;
+		m_zoomFactor *= ZOOM_FACTOR_WHEEL;
+		if (m_zoomFactor > ZOOM_MAX)
+			m_zoomFactor = ZOOM_MAX;
 	}
 	else
 	{
-		m_zoomFactor /= 1.1;
-		if (m_zoomFactor < 0.1)
-			m_zoomFactor = 0.1;
+		m_zoomFactor /= ZOOM_FACTOR_WHEEL;
+		if (m_zoomFactor < ZOOM_MIN)
+			m_zoomFactor = ZOOM_MIN;
 	}
 	
 	Invalidate();
